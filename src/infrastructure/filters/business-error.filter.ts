@@ -12,7 +12,7 @@ export class BusinessErrorFilter implements ExceptionFilter {
     response
       .status(exception.statusCode)
       .json(
-        ResponseBodyFactory.createErrorResponseBody(
+        ResponseBodyFactory.createBusinessErrorResponseBody(
           exception.customCode,
           exception.message,
           path,
