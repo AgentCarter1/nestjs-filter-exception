@@ -1,6 +1,6 @@
 import { ExceptionFilter, Catch, ArgumentsHost } from '@nestjs/common';
 import { CustomException } from 'src/exceptions/custom.exception';
-import { IResponseBody } from 'src/interface/response-body.interface';
+import { ResponseBodyFactory } from 'src/util/factory/response-body.factory';
 
 @Catch(CustomException)
 export class CustomExceptionFilter implements ExceptionFilter {
@@ -9,13 +9,14 @@ export class CustomExceptionFilter implements ExceptionFilter {
     const response = ctx.getResponse();
     const path = ctx.getRequest().route.path;
 
-    const responseBody: IResponseBody = {
-      customCode: exception.customCode,
-      message: exception.message,
-      path,
-      payload: {},
-    };
-
-    response.status(exception.statusCode).json(responseBody);
+    response
+      .status(exception.statusCode)
+      .json(
+        ResponseBodyFactory.createErrorResponseBody(
+          exception.customCode,
+          exception.message,
+          path,
+        ),
+      );
   }
 }
