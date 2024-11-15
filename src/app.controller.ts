@@ -1,6 +1,6 @@
 import { Controller, Get } from '@nestjs/common';
 import { AppService } from './app.service';
-import { CustomException } from './exceptions/custom.exception';
+import { BusinessErrorException } from './domain/exceptions/business-error.exception';
 import { CustomErrorMessageService } from '@dumanargeyazilim/i18n-library';
 
 @Controller()
@@ -17,7 +17,7 @@ export class AppController {
 
   @Get('custom')
   throwCustom() {
-    throw new CustomException(
+    throw new BusinessErrorException(
       this.i18nErrorService.getInvitedEmailDoesNotMatchMessage(),
     );
   }

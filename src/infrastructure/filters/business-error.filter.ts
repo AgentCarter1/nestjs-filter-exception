@@ -1,10 +1,10 @@
 import { ExceptionFilter, Catch, ArgumentsHost } from '@nestjs/common';
-import { CustomException } from 'src/exceptions/custom.exception';
-import { ResponseBodyFactory } from 'src/util/factory/response-body.factory';
+import { BusinessErrorException } from 'src/domain/exceptions/business-error.exception';
+import { ResponseBodyFactory } from 'src/domain/factories/response-body.factory';
 
-@Catch(CustomException)
-export class CustomExceptionFilter implements ExceptionFilter {
-  catch(exception: CustomException, host: ArgumentsHost) {
+@Catch(BusinessErrorException)
+export class BusinessErrorFilter implements ExceptionFilter {
+  catch(exception: BusinessErrorException, host: ArgumentsHost) {
     const ctx = host.switchToHttp();
     const response = ctx.getResponse();
     const path = ctx.getRequest().route.path;

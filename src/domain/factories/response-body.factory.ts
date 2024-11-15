@@ -1,5 +1,5 @@
-import { IErrorResponseBody } from 'src/interface/error-response-body.interface';
-import { ISuccessfulResponseBody } from 'src/interface/successful-response-body.interface';
+import { IErrorResponseBody } from 'src/domain/interfaces/error-response-body.interface';
+import { ISuccessfulResponseBody } from 'src/domain/interfaces/successful-response-body.interface';
 
 export class ResponseBodyFactory {
   static createErrorResponseBody(
